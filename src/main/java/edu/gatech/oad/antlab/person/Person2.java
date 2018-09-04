@@ -35,7 +35,7 @@ public class Person2 {
 		StringBuilder original = new StringBuilder(input);
 		Random randomizer = new Random();
 		int random;
-		for (int i = 1; i <= input.length(); i++) {
+		for (int i = 0; i < input.length(); i++) {
 			random = randomizer.nextInt(input.length() - i);
 			randomized.append(original.charAt(random));
 			original.deleteCharAt(random);
