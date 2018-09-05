@@ -29,6 +29,7 @@ public class Person5 {
 	 * @param input the string to be modified
 	 * @return the modified string
 	 */
+
    private static String calc(String input) {
         //Person 5 put your implementation here
 
