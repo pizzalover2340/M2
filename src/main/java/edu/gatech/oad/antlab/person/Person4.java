@@ -1,12 +1,11 @@
 package edu.gatech.oad.antlab.person;
-
 /**
  *  A simple class for person 4
  *  returns their name and a
  *  modified string 
  *  
- *  @author Bob
- *  @version 1.1
+ *  @author Austin Lowe
+ *  @version 1.2
  */
 public class Person4 {
   /** Holds the persons real name */
@@ -31,7 +30,11 @@ public class Person4 {
      */
     private String calc(String input) {
       //Person 4 put your implementation here
-      return null;
+      String newName = "";
+      for(int i = 0;i < (input.length());i++) {
+        newName += ((char)((int)(input.charAt(i)) + 1));
+      }
+      return newName;
     }
     
     /**
