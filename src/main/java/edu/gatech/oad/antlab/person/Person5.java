@@ -29,10 +29,17 @@ public class Person5 {
 	 * @param input the string to be modified
 	 * @return the modified string
 	 */
-	private String calc(String input) {
-	  //Person 5 put your implementation here
-	  return null;
-	}
+   private static String calc(String input) {
+        //Person 5 put your implementation here
+
+        if (input.length() > 2) {
+            char first = input.charAt(0);
+            char second = input.charAt(1);
+            input = (input.substring(1)).substring(1);
+            return input + first + second;
+        }
+        return input;
+    }
 	
 	/**
 	 * Return a string rep of this object
