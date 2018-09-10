@@ -60,11 +60,20 @@ sourceSets{
     }
 }
 
+// This compiles the resources.jar file as a dependency
+dependencies {
+    compile files('lib/resources.jar')
+}
+
 // Specifies aspects of the output jar file
 jar {
     manifest {
-// Points to the class containing the main method (it's in the resources.jar)
-        attributes 'Main-Class': 'what.the.hell.is.the.fully.qualified.name.for.this'   
+// Points the built jar to the class containing the main method during execution
+// and also adds AntLab31 to its classpath (it's in the resources.jar)
+        attributes (
+            'Main-Class' : 'edu.gatech.oad.antlab.pkg1.AntLabMain',
+            'Class-Path' : '../../lib/resources.jar'
+        )
     }
 }
     
