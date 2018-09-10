@@ -23,30 +23,29 @@
 
 /* 
  * Imports a bunch of stuff that is already preconfigured for java compilation.
- * In fact, the only task we actually have to write is compileTest, and that
- * is only because the plugin uses JUnits by default under the task name 
- * compileTestJava, which is just overkill.
- * 
+ * In fact, we don't have to write any tasks now, just specify jar as the default
+ *
  * It's worth noting here that the project is designed to only 
  * output our names, our garbled gtusernames, and 
  * "Congrats! " + " You" " deserve" + " a" + the output of a method hidden in
  * the precompiled resources.jar file. I'm hoping it's a cookie that I deserve.
  *
- * I'm going to just create an empty src/test/java folder and point the task at it. 
+ * I'm going to just create an empty src/test/java folder (the default test location).
  * I recall a TestyTester.class file existing if you want to dump that in there.
  *
- * We will mostly just have to redefine a couple of directories and create
- * new sourceSets for the three packages.
+ * We will mostly just have to point some things to some other things.
  */
 apply plugin: 'java'
+// specifies that when running only 'gradle' with no task, the jar file will be built
+defaultTasks 'jar'
 
 
-// Defines a custom directory set
+// Defines a custom directory set)
 sourceSets{
 /* 
  * This could be 'test' instead if we needed to change those directories, but we
  * don't because I put it in the default location instead of making things hard.
- * In addition to the default 'test' and 'main' we will define our own sourceSets.
+ * In addition to the default 'test' and 'main' we could define our own sourceSets.
  */
     main {
 // By default this is 'src/main/java'
@@ -60,9 +59,11 @@ sourceSets{
     }
 }
 
-// This compiles the resources.jar file as a dependency
+// This compiles the resources.jar file so that the compiler doesn't fail to
+// find AntLab31, which is inside of it.
 dependencies {
     compile files('lib/resources.jar')
+    runtime files('lib/resources.jar')
 }
 
 // Specifies aspects of the output jar file
@@ -76,4 +77,3 @@ jar {
         )
     }
 }
-    
