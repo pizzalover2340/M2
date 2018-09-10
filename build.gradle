@@ -1,0 +1,70 @@
+/*
+ * This file is generated empty after running 'gradle init' in the directory
+ * It allows us to define what is actually done when running gradle.
+ * 
+ * It is written in Groovy (This is not my choice, I've never even heard of
+ * this language before now. It's weird, but not too difficult.)
+ */
+
+// -------------------------------------------------------------------------------------
+/* From the M2Description.pdf:
+ * 
+ * "Your build file should support the following tasks:
+ * compileJava  compiles and builds the project
+ * compileTest  compiles the unit tests for the project
+ * javadoc      creates the html documentation for the project
+ * clean        removes all the files created by this project
+ * jar          creates the executable jar file for this project
+ * 
+ * The jar task should be the default task when running 'gradle'
+ * for example: 'gradle compileJava' will compile your java project." 
+ */ 
+// -------------------------------------------------------------------------------------
+
+/* 
+ * Imports a bunch of stuff that is already preconfigured for java compilation.
+ * In fact, the only task we actually have to write is compileTest, and that
+ * is only because the plugin uses JUnits by default under the task name 
+ * compileTestJava, which is just overkill.
+ * 
+ * It's worth noting here that the project is designed to only 
+ * output our names, our garbled gtusernames, and 
+ * "Congrats! " + " You" " deserve" + " a" + the output of a method hidden in
+ * the precompiled resources.jar file. I'm hoping it's a cookie that I deserve.
+ *
+ * I'm going to just create an empty src/test/java folder and point the task at it. 
+ * I recall a TestyTester.class file existing if you want to dump that in there.
+ *
+ * We will mostly just have to redefine a couple of directories and create
+ * new sourceSets for the three packages.
+ */
+apply plugin: 'java'
+
+
+// Defines a custom directory set
+sourceSets{
+/* 
+ * This could be 'test' instead if we needed to change those directories, but we
+ * don't because I put it in the default location instead of making things hard.
+ * In addition to the default 'test' and 'main' we will define our own sourceSets.
+ */
+    main {
+// By default this is 'src/main/java'
+        java {
+            srcDirs = ['src/main/java/edu/gatech/oad/antlab']
+        }
+// By default this is 'src/main/resources'
+        resources {
+            srcDirs = ['src/lib']
+        }
+    }
+}
+
+// Specifies aspects of the output jar file
+jar {
+    manifest {
+// Points to the class containing the main method (it's in the resources.jar)
+        attributes 'Main-Class': 'what.the.hell.is.the.fully.qualified.name.for.this'   
+    }
+}
+    
